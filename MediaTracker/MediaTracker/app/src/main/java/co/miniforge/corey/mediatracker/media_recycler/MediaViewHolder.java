@@ -11,6 +11,7 @@ import co.miniforge.corey.mediatracker.MediaItemDetailActivity;
 import co.miniforge.corey.mediatracker.MyListActivity;
 import co.miniforge.corey.mediatracker.R;
 import co.miniforge.corey.mediatracker.model.MediaItem;
+import org.json.JSONObject;
 
 /**
  * Created by corey on 10/15/17.
@@ -19,6 +20,8 @@ import co.miniforge.corey.mediatracker.model.MediaItem;
 public class MediaViewHolder extends RecyclerView.ViewHolder {
     TextView mediaName;
     TextView mediaDescription;
+
+    public static String json;
 
     View inflated;
 
@@ -38,6 +41,8 @@ public class MediaViewHolder extends RecyclerView.ViewHolder {
         mediaDescription = itemView.findViewById(R.id.mediaDescription);
     }
 
+
+
     public void bindData(final MediaItem mediaItem){
         this.mediaName.setText(mediaItem.title);
         this.mediaDescription.setText(mediaItem.description);
@@ -47,6 +52,10 @@ public class MediaViewHolder extends RecyclerView.ViewHolder {
             public void onClick(View view) {
                 //TODO: Create a new activity with this object's data
                 //Hint: mediaItem.toJson().toString() && context.startActivity);
+                Intent intent = new Intent(context.getApplicationContext(),MediaItemDetailActivity.class);
+                json = mediaItem.toJson().toString();
+                intent.putExtra(json,json);
+                context.startActivity(intent);
             }
         });
     }
