@@ -13,7 +13,7 @@ import co.miniforge.corey.mediatracker.media_store.Md5IdHelper;
  */
 
 public class MediaItem {
-    public static int defaultId = 0;
+
 
     public String id;
     public String title;
@@ -41,26 +41,35 @@ public class MediaItem {
     }
 
     public MediaItem(){
-        this.id = Md5IdHelper.idForObject(defaultId++);
+        this.id = Md5IdHelper.idForObject(this);
         this.title = "defaultTitle";
         this.description = "defaultDescription";
         this.url = "defaultUrl";
     }
 
-//    public MediaItemType getTypeForObject(MediaItemType value) {
-//        switch (value){
-//            case Generic:
-//                break;
-////            case TV:
-////                return MediaItemType.TV;
-////            case Movie:
-////                return MediaItemType.Movie;
-////            default:
-////                return MediaItemType.Generic;
-//        }
-//
-//        return MediaItemType.Generic;
-//    }
+    public MediaItemType getTypeForString(String value) {
+        switch (value){
+            case "TV":
+                return MediaItemType.TV;
+            case "Movie":
+                return MediaItemType.Movie;
+            default:
+                return MediaItemType.Generic;
+        }
+
+
+    }
+
+    String getStringForType (MediaItemType type){
+        switch (type) {
+            case Movie:
+                return "Movie";
+            case TV:
+                return "TV";
+            default:
+                return "Generic";
+        }
+    }
 
     public JSONObject toJson(){
         JSONObject mediaItem = new JSONObject();
