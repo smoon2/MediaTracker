@@ -52,7 +52,7 @@ public class MediaViewHolder extends RecyclerView.ViewHolder {
             public void onClick(View view) {
                 //TODO: Create a new activity with this object's data
                 //Hint: mediaItem.toJson().toString() && context.startActivity);
-                Intent intent = new Intent(context.getApplicationContext(),MediaItemDetailActivity.class);
+                Intent intent = new Intent(context.getApplicationContext(),MediaDetailActivity.class);
                 json = mediaItem.toJson().toString();
                 intent.putExtra(json,json);
                 context.startActivity(intent);

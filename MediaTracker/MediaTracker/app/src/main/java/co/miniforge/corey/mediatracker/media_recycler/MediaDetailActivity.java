@@ -58,6 +58,7 @@ public class MediaDetailActivity extends AppCompatActivity {
                 this.jsonData = new JSONObject(json);
                 mediaItem = new MediaItem(this.jsonData);
 
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -75,7 +76,7 @@ public class MediaDetailActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplication(), "hi", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplication(), "hi", Toast.LENGTH_SHORT).show();
                 mediaItem.description =  description.getText().toString();
                 mediaItem.url = url.getText().toString();
                 mediaItem.title = title.getText().toString();

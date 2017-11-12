@@ -34,7 +34,7 @@ public class MediaItem {
             this.url = jsonObject.getString("url");
 
 
-            this.type = getTypeForObject((MediaItemType)jsonObject.get("type"));
+//            this.type = getTypeForObject((MediaItemType)jsonObject.get("type"));
         } catch (Exception e){
             Log.e("toJSONError", String.format("There was an error: %s", e.getMessage()));
         }
@@ -47,20 +47,20 @@ public class MediaItem {
         this.url = "defaultUrl";
     }
 
-    public MediaItemType getTypeForObject(MediaItemType value) {
-        switch (value){
-            case Generic:
-                break;
-//            case TV:
-//                return MediaItemType.TV;
-//            case Movie:
-//                return MediaItemType.Movie;
-//            default:
-//                return MediaItemType.Generic;
-        }
-
-        return MediaItemType.Generic;
-    }
+//    public MediaItemType getTypeForObject(MediaItemType value) {
+//        switch (value){
+//            case Generic:
+//                break;
+////            case TV:
+////                return MediaItemType.TV;
+////            case Movie:
+////                return MediaItemType.Movie;
+////            default:
+////                return MediaItemType.Generic;
+//        }
+//
+//        return MediaItemType.Generic;
+//    }
 
     public JSONObject toJson(){
         JSONObject mediaItem = new JSONObject();
