@@ -10,10 +10,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+import co.miniforge.corey.mediatracker.MediaItemSortHelper;
 
 import org.json.JSONObject;
 
@@ -23,6 +25,8 @@ import java.util.List;
 import co.miniforge.corey.mediatracker.media_recycler.MediaRecyclerAdapter;
 import co.miniforge.corey.mediatracker.media_store.MediaStorageUtil;
 import co.miniforge.corey.mediatracker.model.MediaItem;
+import co.miniforge.corey.mediatracker.ui_helpers.ThemeHelper;
+
 
 public class MyListActivity extends AppCompatActivity {
     public static String mediaExtra = "mediaExtra";
@@ -35,6 +39,8 @@ public class MyListActivity extends AppCompatActivity {
 
     List<MediaItem> mediaItems = new LinkedList<>();
 
+    ThemeHelper themeHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +48,8 @@ public class MyListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+        themeHelper = new ThemeHelper(getApplicationContext());
         storageUtil = new MediaStorageUtil(getApplicationContext());
 
         locateViews();
@@ -49,6 +57,25 @@ public class MyListActivity extends AppCompatActivity {
         bindData();
 
         handleIntent();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_my_list, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch( item.getItemId()){
+            case R.id.sortByType:
+                updateMediaItems(MediaItemSortHelper.sortByType(mediaItems));
+            case R.id.sortByName:
+                updateMediaItems(MediaItemSortHelper.sortByName(mediaItems));
+        }
+        return true;
+
     }
 
     void handleIntent(){
